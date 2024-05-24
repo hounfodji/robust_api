@@ -1,0 +1,7 @@
+dj_database_url
+redis
+whitenoise
+djangorestframework
+psycopg2
+gunicorn
+django-environ
