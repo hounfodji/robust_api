@@ -49,7 +49,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'common.apps.CommonConfig',
-    'access.apps.AccessConfig'
+    'access.apps.AccessConfig',
+    'content.apps.ContentConfig',
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
@@ -139,3 +141,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 os.environ.get("REDIS_URL")
 
 AUTH_USER_MODEL = "access.User"
+
+REST_FRAMEWORK = {
+    "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
+    # "DEFAULT_AUTHENTICATION_CLASSES": [
+    #     "rest_framework_simplejwt.authentication.JWTAuthentication"
+    # ],
+    # "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    # "PAGE_SIZE": ENV.int("API_DEFAULT_PAGE_SIZE", default=10),
+    # "DEFAULT_PAGINATION_CLASS": "api.pagination.PageNumberPagination",
+}
