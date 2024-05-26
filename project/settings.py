@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from project.environment import ENV
 from pathlib import Path
+from datetime import timedelta
 import dj_database_url
 
 # from dotenv import load_dotenv
@@ -144,10 +145,29 @@ AUTH_USER_MODEL = "access.User"
 
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
-    # "DEFAULT_AUTHENTICATION_CLASSES": [
-    #     "rest_framework_simplejwt.authentication.JWTAuthentication"
-    # ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication"
+    ],
     # "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     # "PAGE_SIZE": ENV.int("API_DEFAULT_PAGE_SIZE", default=10),
-    # "DEFAULT_PAGINATION_CLASS": "api.pagination.PageNumberPagination",
+    "DEFAULT_PAGINATION_CLASS": "api.pagination.PageNumberPagination",
 }
+
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(
+        seconds=ENV.int("AUTH_JWT_ACCESS_TOKEN_TIMEOUT", default=86400)
+    ),
+    "REFRESH_TOKEN_LIFETIME": timedelta(
+        seconds=ENV.int("AUTH_JWT_REFRESH_TOKEN_TIMEOUT", default=604800)
+    ),
+    "ROTATE_REFRESH_TOKENS": True,
+    "SIGNING_KEY": ENV.str("AUTH_JWT_SIGNING_KEY"),
+    "USER_ID_FIELD": "uuid",
+}
+
+AUTH_TOKEN_TIMEOUT = ENV.int("AUTH_TOKEN_TIMEOUT", default=259200)
+AUTH_TOKEN_SECRET = ENV.str("AUTH_TOKEN_SECRET")
+
+API_DEFAULT_PAGE_SIZE = ENV.int("API_DEFAULT_PAGE_SIZE", default=10)
+API_MAX_PAGE_SIZE = ENV.int("API_MAX_PAGE_SIZE", default=100)

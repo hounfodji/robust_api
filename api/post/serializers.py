@@ -15,7 +15,7 @@ class PostSerializer(serializers.ModelSerializer):
             "title",
             # "owner",
             "body",
-            # "status",
+            "status",
             "created_at",
         ]
 

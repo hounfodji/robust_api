@@ -10,7 +10,7 @@ from rest_framework.mixins import (
 from .querysets import PUBLIC_POSTS_QUERYSET, ALL_POSTS_QUERYSET
 from .serializers import PostSerializer
 from .filters import PostFilter
-# from api.permissions import AllowAny, IsAuthenticated
+from api.permissions import AllowAny, IsAuthenticated
 from content.models import Post
 
 # region base
@@ -20,7 +20,7 @@ class PostAPIView(GenericAPIView):
     queryset = PUBLIC_POSTS_QUERYSET
     serializer_class = PostSerializer
     filterset_class = PostFilter
-    # permission_classes = [AllowAny]
+    permission_classes = [AllowAny]
 
     search_fields = ["owner__name", "title"]
     ordering_fields = ["created_at"]
@@ -28,7 +28,7 @@ class PostAPIView(GenericAPIView):
 
 
 class PostMeAPIView(PostAPIView):
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return ALL_POSTS_QUERYSET.filter(owner=self.request.user)
