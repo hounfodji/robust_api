@@ -7,7 +7,7 @@ from .views import (
     PostMeRetrieveUpdateDestroyView,
 )
 
-# from api.comment.views import CommentListView
+from api.comment.views import CommentListView
 
 urlpatterns = [
     path("", PostListCreateView.as_view()),
@@ -18,6 +18,6 @@ urlpatterns = [
         "me/<uuid:uuid>/", PostMeRetrieveUpdateDestroyView.as_view(lookup_field="uuid")
     ),
     path("me/<int:pk>/", PostMeRetrieveUpdateDestroyView.as_view()),
-    # path("<uuid:uuid>/comment/", CommentListView.as_view()),
-    # path("<int:pk>/comment/", CommentListView.as_view()),
+    path("<uuid:uuid>/comment/", CommentListView.as_view()),
+    path("<int:pk>/comment/", CommentListView.as_view()),
 ]

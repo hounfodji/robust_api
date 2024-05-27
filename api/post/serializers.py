@@ -1,11 +1,11 @@
 from rest_framework import serializers
 from content.models import Post
-# from api.user.serializers import UserPublicSerializer
+from api.user.serializers import UserPublicSerializer
 
 
 class PostSerializer(serializers.ModelSerializer):
 
-    # owner = UserPublicSerializer(read_only=True)
+    owner = UserPublicSerializer(read_only=True)
 
     class Meta:
         model = Post
@@ -13,7 +13,7 @@ class PostSerializer(serializers.ModelSerializer):
             "id",
             "uuid",
             "title",
-            # "owner",
+            "owner",
             "body",
             "status",
             "created_at",
