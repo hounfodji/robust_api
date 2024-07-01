@@ -34,7 +34,7 @@ SECRET_KEY = ENV.str("SECRET_KEY")
 DEBUG = ENV.bool("DEBUG", default=False)
 # DEBUG = os.environ.get("DEBUG", "False")
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "0.0.0.0", "4cf0-156-0-212-25.ngrok-free.app"]
 
 
 # Application definition
